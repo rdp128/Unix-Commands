@@ -1,0 +1,67 @@
+VI command understanding:
+-----------------------------------------------------------------------------
+TIP
+create blank line after current line
+1) open file in vi mode
+2) shift + g and o 
+
+Copy and paste
+highlight line or word copy using ctrl + insert
+paste it by pressing shift + insert
+-----------------------------------------------------------------------------
+ 
+	· VI stands for visual editor. VIM (VI Improved is current version of VI)
+	· There are two modes in VI 1) Command mode : by default 2)Insert mode : press I or Insert key to enter into this mode
+	· Esc key to get back to the command mode
+	
+	
+	Save/Close file	
+	:q!	it will discard the changes and quit
+	:w	Save but nor exit
+	:wq or zz	save and exit
+	wq!	force override save and exit
+		
+	Moving around in file	
+	h	left
+	l 	right
+	j	down
+	k 	up
+	^	to move the cursor to the start of the current line.
+	$	move the cursor to the end of the current line.
+	 H (“high”)	move the cursor to the top of the screen.
+	M (“middle”)	move the cursor to the middle of the screen.
+	 L (“low”)	move the cursor to the bottom of the screen
+	G (shift + g)	go to END of file
+	1G	go to TOP of file
+	CTRL + f	move one page FORWARD
+	CTRL + b	move one page BACKWARD
+	w	jump to another word separated by space
+	b	jump to previous word separated by space
+	)    	to next sentence
+	}   	 to next paragraph
+	(    	back a sentence
+	{    	back a paragraph
+		
+	Edit text	
+	x	delete current CHARACTER
+	dd	delete current LINE
+	dw	delete word from current position of cursor
+	d0	delete beginning of word from current position of cursor
+	a	insert text after current cursor location
+	u 	Undo
+	uu	Redo
+	o	Open blank line 
+	yw	copy word
+	yy	copy line
+	p	paste after cursor
+	~	Change case of letter (uppercase or lowercase)
+		
+	Search/Replace	
+	/	search from top to bottom
+	?	search from bottom to top
+	n	next search result
+	:%s/one/1/g	replace all occurrence of One to 1
+	:set nu	show line number
+	:set nonu	hide line number
+	:set ic	Searches should ignore case 
+	:set noic	Searches should be case sensitive 
