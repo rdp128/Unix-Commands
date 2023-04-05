@@ -1,0 +1,116 @@
+Find a file containing specific text anywhere on the server
+Let's do something really advanced, like search for the word "AmtType" in all files that start with esnf
+
+find . -name esnf\* | xargs grep AmtType
+
+Find a file with a certain filename anywhere on the server
+find <foldername> name <filename> print 2>/dev/null
+
+If you put / as the folder name then that will search the entire server. Wildcards, such as asterisks are allowed, but need to be prefaced with a backslash, like this:
+
+find . -name jo\*
+
+Get me all files in the current directory that start with "jo"
+
+ls -ltr which shows it in a list, the last person who touched it, and user permissions
+
+check the system disk space
+df -h .
+df -k
+
+check largest file in directory
+du -a /dir/ | sort -n -r | head -n 20
+
+delete files that older than 1 days and sort it 
+find . -type f -mtime +0 -print -exec rm {} \; | xargs ls -1tr
+
+replace word inside same dir multiple file
+perl -i -p -e 's/http:/https:/g;' *.html
+
+validate above changes 
+find . | xargs grep -w  'old word'
+find . | xargs grep -w  'new word'
+
+
+delete files that older than 10 days
+find . -type f -ctime +10 -print -exec rm {} \;
+find . -name '*.log' -mtime +7 -print -exec rm {} \;
+
+1)	find . –mtime 0 –exec grep “Exception” {} \; -print|more
+
+2)	find . –mtime 0 –exec grep “error” {} \; -print|more
+3)	find . –mtime 0 –exec grep “errno” {} \; -print|more
+4)	find . –mtime 0 –exec grep “sqlexec” {} \; -print|more
+5)	find . –mtime 0 –exec grep “dbproc” {} \; -print|more
+6)	find . –mtime 0 –exec grep “ct_connect” {} \; -print|more
+
+Reclusively search in all  sub directory and files:
+find . -type f -exec grep -in " " {} +
+
+Remove directory's file
+rm -r dir/ **working
+find MBS/* -delete
+find . -type d -ctime +10 -print -exec rm {} \;
+
+remove file start with hyphen (-)
+rm ./--<FileName>
+
+delete all files in the directory
+rm -rf * 
+
+Process
+ps aux
+kill process:  kill -9 <port>
+netstat -a | grep <port> : to check port is used or not
+
+pkill -u hnropat
+chan 
+
+ps -ef | grep hnropat
+ps -eo user,pid,etime,args |  sort  -nk 3 | grep -v root | grep -v adm
+
+chmod 664 to lock
+nohup & : Run command in background
+Empty file content: echo -n "" > <FileName>
+
+remove extra spaces:
+sed s/'\s'//g <FileName>
+sed -e "s/[[:space:]]"\+/ /g" test.txt > removedSpaced.txt
+
+Compare two string in earlier saved variable
+
+if [ $USER1 = $USER ]; then
+    echo "same user"
+  else
+    echo "no access"
+fi
+TIP: Without the double quotes and with only one equals.
+
+Store pipe command output to variable
+USER1="`ls -ltr $1 |cut -d' ' -f5`"
+NEW=`echo $RENAME | sed 's/\//_/g'` (use single quote in sed)
+
+TIP: use back tick ` and  double quote "
+
+
+Convert date:
+date "+%y_%m"
+
+
+Replace occurrences:
+Method 1) NEW=`echo $APPEND | sed 's/\//_/g'`
+Method 2) RENAME=`echo $APPEND | tr '/' '_'`
+
+SED:
+‘s’ indicates the search and replace task
+‘g’ option is used in `sed` command to replace all occurrences of matching pattern
+e.x:  echo "Bash Scripting Language" | sed 's/Bash/Perl/'
+
+
+The word ‘Bash’ will be searched in the text, “Bash Scripting Language” and if the word exists in the text then it will be replaced by the word ‘Perl’.
+
+sed '2 s/Python/perl/g' python.txt
+All occurrence of ‘Python’ in the second line is replaced by ‘Perl’.
+
+sed 's/Python/perl/g2' python.txt
+The following `sed` command will replace the second occurrence of the searching pattern in each line of the file, python.txt.
