@@ -1,0 +1,37 @@
+number of Trades volume on business date
+SELECT  trd_dt,count(trd_dt) as count_trd  FROM tba_trade where trd_dt>='2023/04/01' group by trd_dt order by count(trd_dt) desc
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Insert 1MM records in sql server
+
+Declare @Id int
+Set @Id = 1
+
+While @Id <= 1000000
+Begin 
+   Insert Into random_tab values (2,Id ))
+   Set @Id = @Id + 1
+End
+------------------------------------------------------------------------------------------------------------------------------------------------------
+find nth highest salary
+all Duplicate records print 
+1) select * from Employees e1 where 2 = (select count(distinct salary) from Employees e2 where e2.salary >= e1.salary)
+
+no Duplicate records print only 1 next duplicate print if we add top 3
+2) select top 1 * from (select top 2 * from Employees order by salary desc) as e1 order by salary asc
+
+works when no duplicate
+3)select * from Employee e1 where 2 = (select count(*) from Employee e2 where e2.salary >= e1.salary) 
+------------------------------------------------------------------------------------------------------------------------------------------------------
+Useful queries:
+1)find out all available column name in all DB tables
+SELECT syscolumns.name, sysobjects.name as 'Table_name',  systypes.name FROM sysobjects 
+JOIN syscolumns ON sysobjects.id = syscolumns.id
+JOIN systypes ON systypes.type = syscolumns.type AND systypes.usertype = syscolumns.usertype
+WHERE syscolumns.name like '%trd%' --and sysobjects.name LIKE 'tba_trade' 
+
+2)find all available tables within DB
+select name from sysobjects where type ='U' --u mean tables name
+
+3)find all available columns within table
+select tab.name,col.name from sysobjects tab inner join syscolumns col on tab.id = col.id where tab.type = 'U' and tab.name = 'Trades' order by tab.name,col.name
+------------------------------------------------------------------------------------------------------------------------------------------------------
