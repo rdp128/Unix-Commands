@@ -57,3 +57,26 @@ FD is number given by OS which are being open
 1- stdout
 2- stderr
 https://medium.com/geekculture/developer-diaries-processes-files-and-file-descriptors-in-linux-ebf007fb78f8
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+CTRL + C  -->  terminate program  -> SIGINT (Interrupt)
+For example, if a script or program is frozen or stuck in an infinite loop, pressing Ctrl + C cancels that command and returns you to the command line.
+Using Ctrl + C you can not resume the process. where as using Ctrl + Z you can resume the process.
+
+CTRL + D --> pause program -> SIGSTP (Stop)
+cat > test.txt
+ctrl + D       | ctrl + C
+jobs            | stopped permanently 
+kill %1        |
+
+Ctrl + Z --> which pauses the program running in the foreground --> SIGSTP  (terminal stop)
+Ctrl + C To terminate.
+Ctrl + D signals EOF.
+Ctrl + Z suspends a program.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Kill --> SIGTERM(15)
+This is the default and safest way to kill/terminate a or set of processes.
+However, this signal can be handled, ignored or caught in code. If the signal is not caught by a process, the process is killed. Hence, this is used for graceful termination of a process.
+
+kill -9  --> SIGKILL(9)
+Many times this creates zombies process and this is true.
+This signal cannot be handled (caught), ignored or blocked. Hence, this immediately kill the process without any handling and this can create zombies process
