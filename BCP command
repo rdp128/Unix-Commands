@@ -1,0 +1,10 @@
+select * into gsam_sb_bcp..p1_tmp from ar_ei_pool where iid='012700040'          -- created p1_tmp table and inserted ar_ei_pool records using iid
+bcp gsam_sb_bcp..p1_tmp out p1_bcp_01312023_GSAM.bcp -c -t":qwe:" $DB_ARGS       -- bcp out p1_tmp
+bcp gsam_sb_epn..ei_pool in p1_bcp_01312023_GSAM.bcp -c -t":qwe:" $DB_ARGS       -- bcp in ei_pool
+---------------------------------------------------------------------------------------------------------------------------------------------------
+Bring it back to current table from archive table
+insert into gsam_sb_epn..ei_tba select * from ar_ei_tba where msg_id='01270000099' and msg_type= 'CC' and snd_id= 'BNPX'
+---------------------------------------------------------------------------------------------------------------------------------------------------
+sudo -iu gdlradm
+cd ~sdropat/bcp
+bcp gdlr_sb_mbs..tba_trade out tba_trade_ddmmyyyy_GDLR.bcp -c -t":qwe:" $DB_ARG
