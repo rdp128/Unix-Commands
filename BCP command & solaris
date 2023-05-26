@@ -8,3 +8,6 @@ insert into gsam_sb_epn..ei_tba select * from ar_ei_tba where msg_id='0127000009
 sudo -iu gdlradm
 cd ~sdropat/bcp
 bcp gdlr_sb_mbs..tba_trade out tba_trade_ddmmyyyy_GDLR.bcp -c -t":qwe:" $DB_ARG
+---------------------------------------------------------------------------------------------------------------------------------------------------
+uname -a
+SunOS mbsep1 5.10 Generic_Virtual sun4v sparc sun4v
