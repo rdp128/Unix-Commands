@@ -1,0 +1,59 @@
+Remove last column
+nawk -F '|' '{ for(i=1; i<NF-1; i++) printf("%s|", $i); printf "\n"}' <FileName>
+-----------------------------------------------------------------------------------------
+Remove matched line from file1 to file2
+diff file1 file2 | grep '^>' | cut -c3- 
+-----------------------------------------------------------------------------------------
+Remove empty line                                      Count Empty lines
+-----------------------------------                    -----------------------
+grep . <FileName>                                      grep '^$' <FileName> | wc -l
+nawk 'NF' <FileName>                                   grep -c "^$"
+nawk '/./' <FileName>
+grep -v '^$'    <FileName>
+-----------------------------------------------------------------------------------------
+Find special character record in file
+grep -vn "^[a-zA-Z0-9]*$"  <FileName>
+-----------------------------------------------------------------------------------------
+Find Duplicate in file
+sort FileName | uniq -d
+-----------------------------------------------------------------------------------------
+Grep vs find
+grep is used to search the content (word or phrase) within the file or files from directories where FIND command usually used to search the files from the disk
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Inonde
+https://www.thegeekstuff.com/2012/01/linux-inodes/
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+soft link vs hard links
+ln filename hardlink1
+ln -s filename symblink1
+INODE number - li
+hard link keep copy of original file if you remove original file then still we retrieve it
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+$@ :  $@ treats each quoted arguments as separate arguments
+$* :   $* will consider the entire set of positional parameters as a single string.
+
+example:
+ ./test.sh one two "three four"
+Using "$*":
+one two three four
+
+Using "$@":
+one
+two
+three four
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+df vs du (disk usage)
+To view the file size of a directory pass the -s option
+DF(disk free) looks at disk used blocks directly in filesystem metadata. Because of this it returns much faster that du but can only show info about the entire disk/partition
+DU(disk usage) is used more than df in day to day project as it shows the disk usage as per directory level.
+
+Basically, df reads the superblock only and trusts it completely. du reads each object and sums them up.
+du prints the disk usage of every directory in the directory hierarchy, starting
+at the current working directory.
+----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+File Descriptor
+FD is number given by OS which are being open
+0 - stdin
+1- stdout
+2- stderr
+https://medium.com/geekculture/developer-diaries-processes-files-and-file-descriptors-in-linux-ebf007fb78f8
