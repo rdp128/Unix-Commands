@@ -1,5 +1,17 @@
-1. Before deleting files step#2 checks how-many files will be there to remove and archive
+1) Before deleting files step#2 checks how-many files will be there to remove and archive
 find . name "<LogName.*.log>" -mtime +90 -exec ls -ltr {}+
 
-2. Remove individual logs file after archive them in one zip file
+2) Remove individual logs file after archive them in one zip file
 find . name "<LogName.*.log>" -mtime +90 -exec tar -czf <archive.tar.bz2> --remove-files {} +
+
+3) Script of above steps: ScriptName: archiveLogs.sh
+#!/bin/bash
+#Description: Archive logs for X period
+#USAGE: .archiveLogs.sh <logDirectory> <logName> <period>
+
+DIR=$1
+logName=$2
+DAYS=#3
+DT=$(date '+%m_%Y')
+
+find ${DIR} "-name ${logName}*" -mtime +${DAYS} -exec tar -czf archive_logs_${DT}.tar.bz2 --remove-files {} +
