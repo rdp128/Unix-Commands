@@ -15,3 +15,76 @@ DAYS=#3
 DT=$(date '+%m_%Y')
 
 find ${DIR} "-name ${logName}*" -mtime +${DAYS} -exec tar -czf archive_logs_${DT}.tar.bz2 --remove-files {} +
+=======================================================================================================================
+     BATCH SCRIPT TO move files from one share drive to another and preserve same folder structure as soruce
+=======================================================================================================================
+Soruce folder structure as per below need to create same folder structure at Destination and  than move
+//sourceShareDrivePath/Archive/
+ Folder with YYYYMM
+  -202401 (Many Sub folder inside this)
+    -inf_a
+      -From 
+        -archive
+          -atucal files .csv/xlsx
+      -TO
+     -inf_B 
+  -202402
+  ..
+  ..
+  -202412
+
+batch script
+@echo off
+
+set year=%date:~10,4%
+set month=%date:~4,2%
+if "%month:~0,1"=="0" set month=month:~1 #REM important check --> if month retrive from system date has leading 0 then remove as in bar
+REM explanation: in batch number starting with 0 are interpreted as octal values. However 0-7 are valid octal digits 08 and 09 are invalid octal so gives wrong output as batch treted them as decimal
+
+REM validation
+echo current date: %year%month
+
+REM get last 12 month (Adjust to whaever number you wanted to go back)
+set /a :month-=12"
+
+REM Handle yeat if month goes below 1
+if %month lss 1 (
+  set /a "month+=12"
+  set /a "year-=1"
+)
+
+REM add zero to month if required
+if %month lss 10 set "month=0%month%"
+set newDate="%year%month"
+
+REM validation
+echo 12 month ago date: %newDate%
+
+set "sourceDir= <>"
+set "destinationDir= <>"
+
+REM Main Logic
+REM -->calculated date exits at soruce then only TO DO else exits
+REM -->if same date folder doen't exits at destination than create same folder structure before move files
+
+if exist %sourceDir%\%newDate% (
+   echo sorce folder [%sourceDir%\%newDate%] is EXISTS
+   if exist %destinationDir%\%newDate% ( 
+       echo printDestinationDir [%destinationDir%\%newDate%] 
+       #REM /E copies all subdir including empty ones | /MOVE: moved files and delete from source | /NP: NO progess percentage display | /NFL: no file listing  
+       #REM /XX: Prevets removal of extra files already at destination | /MT: MultiThreading enable 8 parallel thread for faster copying
+       robocopy  "%sourceDir%\%newDate%" "%destinationDir%\%newDate%" /MOVE /E /XX /MT:8 /NP /NFL 
+       goto :endloop #REM added for AutoSys so job goes to Success else job completed but still shows as failure 
+ ) else (
+      echo creadting [%%newDate%] directory at %destinationDir%
+      mkdir %destinationDir%\%newDate%
+      robocopy  "%sourceDir%\%newDate%" "%destinationDir%\%newDate%" /MOVE /E /XX /MT:8 /NP /NFL
+      goto :endloop
+  )
+) else ( 
+     echo folder [%sourceDir%\%newDate%] doesn't exists at sorce hence nothing to MOVE
+     echo EXITING... 
+     exit /b
+)
+
+:endloop
