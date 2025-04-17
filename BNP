@@ -88,3 +88,26 @@ if exist %sourceDir%\%newDate% (
 )
 
 :endloop
+============================================================================================================
+FXPB in my terms:
+
+FXPB is credit intermediatory business. We unable or client to trade with other party which is Liquidity provider (Barclays, Deutsche Bank)  and other client of ours 
+Example of FXPB in Action from chtGPT:
+Let’s say Client A is a hedge fund that wants to trade FX with Deutsche Bank, but they don’t have a direct credit relationship with them. Setting one up would take time, involve legal agreements, and require capital. 
+Instead, Client A has an FX Prime Brokerage (FXPB) agreement with us (the Prime Broker). We already have a credit relationship with Deutsche Bank. 
+So here’s what happens: 
+Client A sends an order to trade EUR/USD with Deutsche Bank via an FX trading platform (like EBS or Reuters). 
+Deutsche Bank sees the trade as being done with us (the Prime Broker), not directly with Client A. 
+Once the trade is executed, the settlement and risk go through us. 
+We then allocate the trade to Client A behind the scenes. 
+This way, Client A can trade with Deutsche Bank (or other liquidity providers like Barclays, Citi, etc.) without needing separate agreements with each of them. 
+ 
+To get trades to clear both party has to report their trades with us. 
+  - verify trades with credit agreement  
+From BNPP website - https://globalmarkets.cib.bnpparibas/foreign-exchange-prime-brokerage/: 
+As a leading Foreign Exchange Prime Broker (FXPB), BNP Paribas serves a diversified institutional client base, including multi-strategy and macro hedge funds, asset managers, banks, large non-bank liquidity providers and agency brokers across regions. Our long established, award-winning, robust platform has an extensive product and currency coverage, including precious metals. Our integrated Prime Brokerage and Clearing platform underpins the strength of our cross-margining offering. We are one of only a few banks globally that offers the full suite of trading, financing, clearing and custody, in partnership with BNP Paribas Securities Services. 
+Operating independently of 3rd party providers, BNP Paribas’ proprietary technology offers maximum flexibility to clients with our integration solutions including Financial Information eXchange (FIX) and File Transfer Protocol (FTP) integrations. 
+‘Infinity’ is BNP Paribas’ front-to-back system which includes end-to-end matching engine, trade booking, real-time risk management, with a full reporting suite which is proprietarily developed in-house by BNP Paribas. It provides enhanced flexibility compared with a 3rd party vendor approach, enabling special integration and bespoke functionality for clients. 
+‘DataDirect’ provides a full suite of end-of-day and intraday (real time) reports for positions, credit, trades and margin. It offers position rolls and closeouts via BNP Paribas’ online portal. 
+
+ ============================================================================================================
