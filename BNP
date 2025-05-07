@@ -111,3 +111,9 @@ Operating independently of 3rd party providers, BNP Paribas’ proprietary techn
 ‘DataDirect’ provides a full suite of end-of-day and intraday (real time) reports for positions, credit, trades and margin. It offers position rolls and closeouts via BNP Paribas’ online portal. 
 
  ============================================================================================================
+Batch Script to Remove files ffrom folder and folder it self
+
+rename dir dir_old
+mkdir dir
+del /f/s/q dir_old > nul
+rmdir /s/q dir_old
